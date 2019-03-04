@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../css/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../css/animate.css" rel="stylesheet" />
+
+    <!-- Sweet alert 2 Plugin Css-->
+    <link href="../../css/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link href="../../css/style_admin.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-green">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand anton" href="#">Landria</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="../../img/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                    <div class="email">john.doe@example.com</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li>
+                        <a onClick="renderEjs('users/dashboard');">
+                            <i class="material-icons">view_list</i>
+                            <span>View Your Property</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a onClick="renderEjs('users/property/register');">
+                            <i class="material-icons">border_color</i>
+                            <span>Register a Property</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a onClick="renderEjs('users/property/sell');">
+                            <i class="material-icons">attach_money</i>
+                            <span>Sell a Property</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018 - 2019 <a href="javascript:void(0);">Landria</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.5
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>SELL PROPERTY</h2>
+                            </div>
+                            <div class="body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="property_id">Select Property Id<span style="color:red;"> *</span></label>
+                                        <select class="custom-select" id="property_id" name="property_id">
+                                            <option value="NA">Choose an option</option>
+                                            <%  for(var i=0; i < lands.length; ++i) { %>
+                                                <option value="<%= lands[i].id %>"><%= lands[i].nickname + " (" + lands[i].id + ")" %></option>
+                                            <%  } %>
+                                        </select>
+                                    </div>
+                                    <fieldset id="property_details" disabled>
+                                        <!-- Display plot number, building number, building name-->
+                                        <div class="row clearfix">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="plot_no">Plot Number</label>
+                                                        <input type="text" class="form-control" id="plot_no" name="plot_no"
+                                                            placeholder="" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Enter street name and locality-->
+                                        <div class="row clearfix">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="street">Street Name</label>
+                                                        <input type="text" id="street" name="street" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="locality">Locality</label>
+                                                        <input type="text" id="locality" name="locality" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Enter city and state-->
+                                        <div class="row clearfix">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="city">City Name</label>
+                                                        <input type="text" id="city" name="city" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="state">State</label>
+                                                        <input type="text" id="state" name="state" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <label for="buyer_id">Select Buyer<span style="color:red;"> *</span></label>
+                                        <select class="custom-select" id="buyer_id" name="buyer_id">
+                                            <option value="NA">Choose an option</option>
+                                            <%  for(var i=0; i < users.length; ++i) { %>
+                                                <option value="<%= users[i].id %>"><%= users[i].name + " (" + users[i].id + ")" %></option>
+                                            <%  } %>
+                                        </select>
+                                    </div>
+                                    <fieldset id="buyer_details" disabled>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="fname">First Name</label>
+                                                        <input type="text" class="form-control" id="fname" name="fname"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="lname">Last Name</label>
+                                                        <input type="text" class="form-control" id="lname" name="lname"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <label for="aadhaar_number">Aadhaar Number</label>
+                                                        <input type="text" id="aadhaarNumber" name="aadhaar_number" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <button type="button" class="btn btn-primary" id="createSaleAgreementBtn">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="../../js/jquery.min.js"></script>
+
+    <!-- Jquery redirect plugin Js -->
+    <script src="../../js/jquery.redirect.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../js/bootstrap.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../js/jquery.slimscroll.js"></script>
+
+    <!-- Sweet alert 2 Plugin Js-->
+    <script src="../../js/sweetalert2.min.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../js/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+
+    <script type="text/javascript">
+        $('#property_id').on('change', function() {
+            var landId = $('#property_id').val();
+            if(landId != 'NA') {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:4200/users/property/populate',
+                    data: { landID:landId },
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(response) {
+                        if(response.status == 'Ok') {
+                            $('#plot_no').val(response.landDetails.plotNumber);
+                            $('#street').val(response.landDetails.streetName);
+                            $('#locality').val(response.landDetails.locality);
+                            $('#city').val(response.landDetails.cityName);
+                            $('#state').val(response.landDetails.state);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Could not populate fields!',
+                                text: response.message
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Could not populate fields!',
+                            text: 'Some error occured. Please try again'
+                        })
+                    }
+                });
+            }
+        });
+
+        $('#buyer_id').on('change', function() {
+            var userId = $('#buyer_id').val();
+            if(userId != 'NA') {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:4200/users/populate',
+                    data: { userId:userId },
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(response) {
+                        if(response.status == 'Ok') {
+                            $('#fname').val(response.userDetails.firstName);
+                            $('#lname').val(response.userDetails.lastName);
+                            $('#aadhaarNumber').val(response.userDetails.aadhaarNumber);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Could not populate fields!',
+                                text: response.message
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Could not populate fields!',
+                            text: 'Some error occured. Please try again'
+                        })
+                    }
+                });
+            }
+        });
+
+        $("#createSaleAgreementBtn").on('click', function(e) {
+            e.preventDefault();
+            var buyerId = $('#buyer_id').val();
+            var landId = $("#property_id").val();
+            console.log(landId);
+            if(buyerId == 'NA' || landId == 'NA' || typeof landId == 'undefined' || typeof buyerId == 'undefined') {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Invalid submission!',
+                    text: 'Not all fields are filled. Please check again'
+                })
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:4200/users/property/create/agreement',
+                    data: { buyerId:buyerId, landId:landId },
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(response) {
+                        if(response.status == 'Ok') {
+                            Swal.fire({
+                                type: 'success',
+                                title: 'Sale agreement created',
+                                text: response.message
+                            })
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Could not populate fields!',
+                                text: response.message
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Could not populate fields!',
+                            text: 'Some error occured. Please try again'
+                        })
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
