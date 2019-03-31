@@ -25,6 +25,9 @@
     <!-- Custom Css -->
     <link href="../css/style_admin.css" rel="stylesheet">
 
+    <!-- Sweet alert 2 Plugin Css-->
+    <link href="../../css/sweetalert2.min.css" rel="stylesheet">
+
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../css/all-themes.css" rel="stylesheet" />
 </head>
@@ -88,7 +91,7 @@
             <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
-                <ul class="list">   
+                <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
                         <a onClick="renderEjs('users/dashboard');">
@@ -129,24 +132,30 @@
         <div class="container-fluid">
             <div class="block-header">
                 <h2>YOUR PROPERTY</h2>
-                
-                    <div class="row clearfix">
-                        <%  for(var i=0; i < lands.length; ++i) { %>
+
+                <div class="row clearfix">
+                    <%  for(var i=0; i < lands.length; ++i) { %>
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="card">
-                                <img src="<%= lands[i].imageFileLink %>" class="card-img-top"
-                                alt="...">
+                                <img src="<%= lands[i].imageFileLink %>" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Land ID: <%= lands[i]._id %></h5>
-                                    <p class="card-text"><%= lands[i].plotNumber + " " + lands[i].streetName + " " + lands[i].locality + " " + lands[i].cityName %></p>
+                                    <h5 class="card-title">Land ID:
+                                        <%= lands[i]._id %>
+                                    </h5>
+                                    <p class="card-text">
+                                        <%= lands[i].plotNumber + " " + lands[i].streetName + " " + lands[i].locality + " " + lands[i].cityName %>
+                                    </p>
+                                    <p class="card-text" id="fingerprint_status">
+
+                                    </p>
                                     <a href="#" onClick="renderEjs('users/property/view', '<%= lands[i]._id %>');" class="btn btn-lg btn-primary">View Details</a>
-                                    <a href="#" onClick="renderEjs('users/property/sell')" class="btn btn-lg btn-success">Sell Property</a>
+                                    <a href="#" onClick="initiateFingerprintValidation('<%= lands[i]._id %>','<%= userAadhaar %>')" class="btn btn-lg btn-success">Sell Property</a>
                                 </div>
                             </div>
                         </div>
                         <%  } %>
-                    </div>   
-                
+                </div>
+
             </div>
         </div>
     </section>
@@ -169,9 +178,13 @@
     <!-- Waves Effect Plugin Js -->
     <script src="../js/waves.js"></script>
 
+    <!-- Sweet alert 2 Plugin Js-->
+    <script src="../../js/sweetalert2.min.js"></script>
+
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/user_dashboard.js"></script>
 
     <!-- Demo Js -->
     <script src="../js/demo.js"></script>

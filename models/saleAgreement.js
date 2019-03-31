@@ -7,7 +7,7 @@ let saleAgreementSchema = mongoose.Schema({
         required: [true, 'Buyer is required']
     },
     seller: {
-        type:String,
+        type: String,
         required: [true, 'Seller is required']
     },
     land: {
@@ -21,7 +21,11 @@ let saleAgreementSchema = mongoose.Schema({
     landText: {
         type: String,
         required: [true, 'Land text required']
-    }
+    } //,
+    // sellerFingerprintVerify: {
+    //     type: boolean,
+    //     default: false
+    // }
 });
 
 /**
