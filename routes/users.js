@@ -3,6 +3,12 @@ var multer = require('multer')
 var crypto = require('crypto')
 var path = require('path')
 var bcrypt = require('bcrypt')
+const ipfsAPI = require('ipfs-api');
+const fs = require('fs');
+const app = express();
+
+const ipfs = ipfsAPI('ipfs.infura.io', '5001', {protocol: 'https'});
+
 
 const storage = multer.diskStorage({
     destination: 'public/images/uploads/users/Aadhaar',
@@ -107,6 +113,30 @@ router.post('/property/register/new', cpUpload, function(req, res, next) {
         var imagefilePathArray = req.files['image'][0].path.split("/");
         let imagefilePath = "/images/uploads/lands/" + imagefilePathArray[imagefilePathArray.length - 1];
         let imageLink = req.protocol + "://" + req.hostname + ':4200/' + imagefilePath;
+
+
+        let testfile = fs.readFileSync("public/" + deedfilePath);
+        let testBuffer = new Buffer(testfile);
+
+        ipfs.files.add(testBuffer, function(err, file){
+            if(err)
+            {
+                console.log(err);
+            }
+            console.log(JSON.stringify(file));
+        });
+
+        // let testfile2 = fs.readFileSync("public/" + imagefilePath);
+        // let testBuffer2 = new Buffer(testfile2);
+
+        // ipfs.files.add(testBuffer2, function(err, file){
+        //     if(err)
+        //     {
+        //         console.log(err);
+        //     }
+        //     console.log(file);
+        // })
+
 
         let newLand = new Land({
             owner: req.cookies.userID,
